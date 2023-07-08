@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>前端</title>
+    <meta charset="UTF-8"/>
+</head>
+
+<body>
+<div id="my"></div>
+
+
+<script type="text/babel">
+  const my = document.getElementById('my')
+
+  // const h1 = React.createElement('div', {className: 'classDiv'}, 'hello Div')
+  function formatName(user) {
+    return `hello ${user}s`
+  }
+
+  function getGreeting(user) {
+    if (user) {
+      return <h1>{formatName(user)}</h1>
+    }
+    return 'hello 使用者'
+  }
+
+  const h2 = getGreeting('xyz')
+  // const h1 = <h1 className='asd'>hello JSX</h1>
+
+  const root = ReactDOM.createRoot(my)
+  root.render(h2)
+</script>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script src="./js/index1.js"></script>
+
+</body>
+
+</html>

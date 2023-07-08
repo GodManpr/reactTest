@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>芳芳带你学前端</title>
+  <meta charset="UTF-8" />
+</head>
+
+<body>
+  <div id="my"></div>
+
+  <script type="text/babel">
+    //组件的定义有二种方式
+    //函数组件
+    function Hello(props){
+      const {name,age,friend} = props;
+      const msg = 'hello';
+      return <h1>{msg} {name}---{age}</h1>
+    };
+
+    //class类组件
+    // class Hello extends React.Component{
+    //   constructor(){
+    //     super();
+    //   }
+    //   render(){
+    //     return <h1>hello {this.props.title}</h1>
+    //   }
+    // }
+
+    const user = {
+      name:'ff',
+      address:'wuhan',
+      age:18,
+      friend:{
+        name:'xyz'
+      }
+    }
+   
+    //元素渲染
+    const domContainer = document.getElementById('my'); //指定容器
+    const root = ReactDOM.createRoot(domContainer); //创建根目录
+    root.render(<Hello {...user}/>); //将元素渲染
+  
+
+  </script>
+
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+</body>
+
+</html>

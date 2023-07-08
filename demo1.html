@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>芳芳带你学前端</title>
+  <meta charset="UTF-8" />
+</head>
+
+<body>
+  <div id="my"></div>
+
+  <script type="text/babel">
+    //JSX
+    // function getGreeting(user) {
+    //   if (user) {
+    //     return <h1>Hello,{user} !</h1>;
+    //   }
+    //   return <h1>Hello, Stranger.</h1>;
+    // }
+
+    // const h1 = getGreeting('xyz');
+    //JSX 中指定属性
+    // const element = <img src={user.avatarUrl}></img>;
+   
+    //元素渲染
+    const domContainer = document.getElementById('my'); //指定容器
+    const root = ReactDOM.createRoot(domContainer); //创建根目录
+    //root.render(h1); //将元素渲染
+      //console.log(_ul); //虚拟dom
+
+    function tick() {
+      const element = (
+        <div>
+          <h1>Hello, world!</h1>
+          <h2>It is {new Date().toLocaleTimeString()}</h2>
+        </div>
+      );
+      root.render(element);
+    };
+    setInterval(tick, 1000);
+
+  </script>
+
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+</body>
+
+</html>
