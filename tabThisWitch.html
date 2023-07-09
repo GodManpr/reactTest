@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>前端</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+  <div id="my"></div>
+
+
+  <script type="text/babel">
+
+    // 1、通过bind更改this指向   this.action.bind(this)
+    // 2、箭头函数
+    class Hello extends React.Component {
+      constructor() {
+        super()
+        this.state = {
+          isShow: true,
+        }
+        this.isClick = this.action.bind(this)
+      }
+      action(n) {
+        console.log('this:', this)// undefined
+        console.log(n)
+        this.setState({
+          isShow: !this.state.isShow
+        })
+      }
+      action2 = n => {
+        console.log(n)
+      }
+      action6(n) {
+        console.log(n)
+      }
+      render() {
+        const { isShow } = this.state
+        return (
+          <div>
+            <div>
+              <button onClick={this.isClick}>btn1</button>
+              <h1>{isShow ? '显示' : '隐藏'}</h1>
+            </div>
+            <div>
+              <button onClick={function () { console.log(this) }}>btn2</button>
+              <button onClick={() => console.log(this)}>btn3</button>
+              <button onClick={() => this.action()}>btn4</button>
+              <button onClick={this.action2}>btn5</button>
+              <h1>{isShow ? '显示' : '隐藏'}</h1>
+            </div>
+
+            <div>
+              <h1></h1>
+              <button onClick={this.action6.bind(this, 5555)}>btn6</button>
+              <button onClick={() => this.action(6666)}>btn7</button>
+              <button onClick={this.action}>btn8</button> 
+              <h1>{isShow ? '显示' : '隐藏'}</h1>
+            </div>
+          </div>
+        )
+      }
+    }
+
+
+
+
+    // 元素渲染
+    const my = document.getElementById('my')
+    const root = ReactDOM.createRoot(my)
+    root.render(<Hello />)
+  </script>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script src="./js/index1.js"></script>
+
+</body>
+
+</html>

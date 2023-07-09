@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>前端</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+  <div id="my"></div>
+
+
+  <script type="text/babel">
+
+    function OneList() {
+      return (
+        <h1>这是标题1的内容</h1>
+      )
+    }
+
+    function TwoList() {
+      return (
+        <ul>
+          <li>11111</li>
+          <li>11111</li>
+          <li>11111</li>
+          <li>1111</li>
+        </ul>
+      )
+    }
+    class Hello extends React.Component {
+      constructor() {
+        super()
+        this.state = {
+          isShow: true,
+          tabs: [
+            { id: 1, title: '标题1', content: '标题11111111111' },
+            { id: 2, title: '标题2', content: '标题22222222222' },
+            { id: 3, title: '标题3', content: '标题33333333333' },
+            { id: 4, title: '标题4', content: '标题44444444444' },
+            { id: 5, title: '标题5', content: '标题555555555555' },
+          ],
+          lists: [
+            <OneList />,
+            <TwoList />
+          ],
+          lists2: {
+            '标题1': <OneList />,
+            '标题2': <TwoList />
+          },
+          curIndex: 0// 当前选中的索引
+        }
+      }
+      whichComponent(title) {
+        // switch (title) {
+        //   case '标题1':
+        //     return <li><OneList /></li>
+        //   case '标题2':
+        //     return <li><TwoList /></li>
+        //   default:
+        //     return <li><TwoList /></li>
+        // }
+        return <li><TwoList /></li>
+      }
+
+      tabChange(index) {
+        this.setState({
+          isShow: !this.state.isShow,
+          curIndex: index
+        })
+      }
+
+      render() {
+        const { tabs, curIndex, lists, lists2 } = this.state
+        const tabTitle = tabs.map((item, i) => <li key={item.id} className={curIndex === i ? "active" : ""}
+          onClick={() => this.tabChange(i)}>{item.title}</li>)
+        // const tabContent = tabs.map((item, i) => curIndex === i ? <li key={item.id} >{item.content}</li> : '')
+        // const tabContent = <li>{lists[curIndex]}</li>
+        const tabContent = tabs.map((item, i) => <li key={i}><TwoList /></li>)
+        return (
+          <div>
+            <ul className="box">
+              {
+                tabTitle
+              }
+            </ul>
+
+            <div>
+              <span>
+                {
+                  tabContent
+                }
+              </span>
+            </div>
+          </div>
+        )
+      }
+    }
+
+
+
+
+    // 元素渲染
+    const my = document.getElementById('my')
+    const root = ReactDOM.createRoot(my)
+    root.render(<Hello />)
+  </script>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script src="./js/index1.js"></script>
+
+</body>
+
+</html>

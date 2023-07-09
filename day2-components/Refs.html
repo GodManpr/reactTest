@@ -4,6 +4,7 @@
 <head>
   <title>前端</title>
   <meta charset="UTF-8" />
+  <link rel="stylesheet" href="css/index.css">
 </head>
 
 <body>
@@ -11,48 +12,42 @@
 
 
   <script type="text/babel">
-
-    // const h1 = React.createElement('div', {className: 'classDiv'}, 'hello Div')
-    // function formatName(user) {
-    //   return `hello ${user}s`
-    // }
-
-    // function getGreeting(user) {
-    //   if (user) {
-    //     return <h1>{formatName(user)}</h1>
-    //   }
-    //   return 'hello 使用者'
-    // }
-
-
+    function Sign() {
+      return <h1>签到</h1>
+    }
+    function NotSign() {
+      return <h2>未签到</h2>
+    }
     class Hello extends React.Component {
       constructor() {
         super()
         this.state = {
-          id: 1
+          checked: true
         }
       }
-
-      add() {
+      checkChange(e) {
+        const v = e.target.checked
         this.setState({
-          id: this.state.id+3
+          checked: v
         })
       }
-
       render() {
-        const { id } = this.state
+        const { checked } = this.state
+        let _h1;
+        if (checked) {
+          _h1 = <Sign />
+        } else {
+          _h1 = <NotSign />
+        }
         return (
           <div>
-            <h1>Hello {id}</h1>
-            <button onClick={() => this.add() }>btn</button>
+            <h1>是否打卡：</h1>
+            <input type="checkbox" checked={checked} onChange={() => this.checkChange(event)} />
+            {_h1}
           </div>
         )
       }
     }
-
-
-
-
 
     // 元素渲染
     const my = document.getElementById('my')

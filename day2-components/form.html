@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>前端</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+  <div id="my"></div>
+
+
+  <script type="text/babel">
+    function Test() {
+      return (
+        <h1>测试</h1>
+      )
+    }
+    class Hello extends React.Component {
+      constructor() {
+        super()
+        this.state = {
+          checked: true,
+          value: 'input',
+          textarea: 'textarea',
+          male: 'man',
+          select: 'red',
+          items: [
+            { id: 1, v: 'red', check: true },
+            { id: 2, v: 'green', check: true },
+            { id: 3, v: 'blue', check: true },
+            { id: 4, v: 'yellow', check: true },
+            { id: 5, v: 'black', check: false },
+          ]
+        }
+      }
+      checkChange(e) {
+        const v = e.target.checked
+        this.setState({
+          checked: v
+        })
+      }
+      checkChange2(v) {
+        let { items } = this.state
+        items.forEach(item => {
+          if (item.id === v.id) {
+            item.check = !v.check
+          }
+        })
+        // const v = e.target.checked
+        this.setState({
+          items
+        })
+      }
+      handleChange(e) {
+        this.setState({
+          value: e.target.value
+        })
+      }
+      handleTestarea(e) {
+        this.setState({
+          textarea: e.target.value
+        })
+      }
+      handleRadio(e) {
+        this.setState({
+          male: e.target.value
+        })
+      }
+      changeSelect(e) {
+        this.setState({
+          select: e.target.value
+        })
+      }
+      render() {
+        const { items } = this.state
+        const color = ['red', 'green', 'blue']
+        return (
+          <div>
+            <h1>input输入框</h1>
+            <div>
+              <label>非受限输入框</label>
+              <input type="text" defaultValue="123" />
+            </div>
+            <div>
+              <label>受限输入框</label>
+              <input type="text" value={this.state.value} onChange={(e) => this.handleChange(e)} />
+              <h1>双向数据绑定{this.state.value}</h1>
+            </div>
+            <hr />
+
+            <h1>textarea标签</h1>
+            <div>
+              <label>非受限</label>
+              <textarea type="text" defaultValue="123" />
+            </div>
+            <div>
+              <label>受限</label>
+              <textarea type="text" value={this.state.textarea} onChange={(e) => this.handleTestarea(e)} />
+              <h1>双向数据绑定{this.state.textarea}</h1>
+            </div>
+            <hr />
+
+            <h1>radio标签</h1>
+            <div>
+              <label>性别</label>
+              <input type="radio" name="radioName" checked={this.state.male === 'man' ? true : false}
+                onChange={(e) => this.handleRadio(e)} value="man" />男
+              <input type="radio" name="radioName" checked={this.state.male === 'women' ? true : false}
+                onChange={(e) => this.handleRadio(e)} value="women" />女
+              <h1>双向数据绑定{this.state.male}</h1>
+            </div>
+            <hr />
+            <h1>复选框</h1>
+            <div>
+              <label>选中状态(单个)</label>
+              <input type="checkbox"
+                checked={this.state.checked}
+                onChange={(e) => this.checkChange(e)} />
+              <h1>双向数据绑定{this.state.checked ? '选中' : '未选中'}</h1>
+            </div>
+            <div>
+              <label>选中状态(多个)</label>
+              {
+                items.map((item, i) => (
+                  <div key={item.id}>
+                    <input type="checkbox"
+                      checked={item.check}
+                      onChange={() => this.checkChange2(item)} />{item.v}
+                  </div>
+                ))
+              }
+            </div>
+
+            <hr />
+            <h1>select 下拉框</h1>
+            <div>
+              <label>选择颜色</label>
+              <select value={this.state.select} onChange={(e) => this.changeSelect(e)}>
+                {color.map((v,i) => <option key={i} value={v}>{v}</option>)}
+              </select>
+            </div>
+          </div>
+        )
+      }
+    }
+    // <input type="checkbox"
+    //             checked={this.state.checked}
+    //             onChange={(e) => this.checkChange(e)} />
+    //           <h1>双向数据绑定{this.state.checked ? '选中' : '未选中'}</h1>
+    // 元素渲染
+    const my = document.getElementById('my')
+    const root = ReactDOM.createRoot(my)
+    root.render(<Hello />)
+  </script>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script src="./js/index1.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>前端</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+  <div id="my"></div>
+
+
+  <script type="text/babel">
+    function Test() {
+      return (
+        <h1>测试</h1>
+      )
+    }
+    class Hello extends React.Component {
+      constructor() {
+        super()
+        this.state = {
+          checked: true,
+          name: 'input',
+          textarea: 'textarea',
+          count: 1,
+          male: 'man',
+          select: 'red',
+        }
+      }
+      checkChange(e) {
+        const v = e.target.checked
+        this.setState({
+          checked: v
+        })
+      }
+      handleChange(e) {
+        let name = e.target.name
+        let value = e.target.type === 'checkbox' ? e.target.checked : e.target.value
+        this.setState({
+          [name]: value
+        })
+      }
+      changeSelect(e) {
+        this.setState({
+          select: e.target.value
+        })
+      }
+      handleRadio(e) {
+        this.setState({
+          male: e.target.value
+        })
+      }
+      submit() {
+        alert(JSON.stringify(this.state))
+      }
+      render() {
+        const { items } = this.state
+        const color = ['red', 'green', 'blue']
+        return (
+          <div>
+            <div>
+              <label>商品名称</label>
+              <input type="text" name="name" value={this.state.value} onChange={(e) => this.handleChange(e)} />
+            </div>
+            <div>
+              <label>商品数量</label>
+              <input type="number" name="count" value={this.state.count} onChange={(e) => this.handleChange(e)} />
+            </div>
+            <div>
+              <label>商品描述</label>
+              <textarea type="text" name="textarea" value={this.state.textarea} onChange={(e) => this.handleChange(e)} />
+            </div>
+            <div>
+              <label>性别</label>
+              <input type="radio" name="male" checked={this.state.male === 'man' ? true : false}
+                onChange={(e) => this.handleChange(e)} value="man" />男
+              <input type="radio" name="male" checked={this.state.male === 'women' ? true : false}
+                onChange={(e) => this.handleChange(e)} value="women" />女
+            </div>
+            <div>
+              <label>是否购买</label>
+              <input type="checkbox" name="checked"
+                checked={this.state.checked}
+                onChange={(e) => this.handleChange(e)} />
+            </div>
+
+            <div>
+              <label>选择颜色</label>
+              <select name="select" value={this.state.select} onChange={(e) => this.handleChange(e)}>
+                {color.map((v, i) => <option key={i} value={v}>{v}</option>)}
+              </select>
+            </div>
+
+            <div>
+              <button onClick={() => this.submit()}>提交</button>
+            </div>
+          </div>
+        )
+      }
+    }
+    // 元素渲染
+    const my = document.getElementById('my')
+    const root = ReactDOM.createRoot(my)
+    root.render(<Hello />)
+  </script>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script src="./js/index1.js"></script>
+
+</body>
+
+</html>
